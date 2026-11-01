@@ -1,104 +1,426 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="dark">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Menu TL | TL STUDIO</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    body {
-      background-color: #05070d;
-      background-image: 
-        radial-gradient(at 50% 0%, rgba(59, 130, 246, 0.15) 0px, transparent 50%),
-        radial-gradient(at 100% 100%, rgba(147, 51, 234, 0.15) 0px, transparent 50%);
-    }
-    .neon-border {
-      box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
-    }
-    .neon-border:hover {
-      box-shadow: 0 0 25px rgba(59, 130, 246, 0.6);
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu TL | Link Bio VIP</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        oled: '#000000',
+                        cardBg: 'rgba(12, 12, 15, 0.75)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        * {
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+
+        body {
+            background-color: #000000;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Subtle animated ambient aura */
+        .ambient-glow {
+            position: fixed;
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 550px;
+            height: 550px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.07) 0%, rgba(59, 130, 246, 0.05) 40%, rgba(0,0,0,0) 70%);
+            z-index: -1;
+            pointer-events: none;
+            filter: blur(60px);
+        }
+
+        /* Glassmorphism Card Style */
+        .oled-card {
+            background: rgba(14, 14, 18, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.9);
+        }
+
+        /* Biolink Action Button Hover */
+        .bio-btn {
+            background: linear-gradient(135deg, rgba(20, 20, 26, 0.8) 0%, rgba(10, 10, 14, 0.9) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .bio-btn:hover {
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.4);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
+            background: linear-gradient(135deg, rgba(30, 30, 40, 0.9) 0%, rgba(15, 15, 22, 0.95) 100%);
+        }
+
+        /* Metallic Floating Crown Floating Animation */
+        .crown-float {
+            animation: float 4s ease-in-out infinite alternate;
+            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.4));
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(-1deg); }
+            100% { transform: translateY(-6px) rotate(1deg); }
+        }
+
+        /* Avatar Glowing Border Ring */
+        .avatar-glow {
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.25), inset 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        /* Equalizer Animation */
+        .eq-bar {
+            width: 3px;
+            height: 12px;
+            background-color: #ffffff;
+            border-radius: 2px;
+            animation: eqAnim 1.2s ease-in-out infinite alternate;
+        }
+        .eq-bar:nth-child(2) { animation-delay: 0.3s; height: 16px; }
+        .eq-bar:nth-child(3) { animation-delay: 0.15s; height: 10px; }
+        .paused .eq-bar {
+            animation-play-state: paused;
+            height: 4px;
+            opacity: 0.4;
+        }
+
+        @keyframes eqAnim {
+            0% { transform: scaleY(0.3); opacity: 0.4; }
+            100% { transform: scaleY(1); opacity: 1; }
+        }
+    </style>
 </head>
-<body class="text-white min-h-screen flex flex-col items-center justify-center p-4">
+<body class="min-h-screen flex flex-col justify-between items-center px-4 py-10 relative">
 
-  <!-- Container Principal -->
-  <div class="w-full max-w-md flex flex-col items-center">
-    
-    <!-- Coroa & Avatar / Logo Central -->
-    <div class="relative mb-4 flex flex-col items-center">
-      <!-- Coroa Neon -->
-      <i class="fa-solid font-black fa-crown text-3xl text-amber-400 drop-shadow-[0_0_10px_rgba(251,191,36,0.8)] -mb-3 z-10"></i>
-      
-      <!-- Logo Central -->
-      <div class="w-24 h-24 rounded-full bg-gradient-to-tr from-blue-600 via-cyan-400 to-indigo-600 p-[2px] neon-border transition-all duration-300">
-        <div class="w-full h-full bg-slate-950 rounded-full flex items-center justify-center border border-slate-800">
-          <span class="text-3xl font-black tracking-tighter bg-gradient-to-r from-blue-400 to-cyan-300 bg-clip-text text-transparent">
-            TL
-          </span>
-        </div>
-      </div>
+    <!-- Starfield Canvas -->
+    <canvas id="starfield" class="fixed inset-0 z-[-2] pointer-events-none"></canvas>
+
+    <!-- Ambient Aura Blur -->
+    <div class="ambient-glow"></div>
+
+    <!-- AUDIO CONTROLLER (TOP RIGHT) -->
+    <div class="fixed top-5 right-5 z-40">
+        <button onclick="toggleAudio()" id="audioBtn" class="oled-card px-3.5 py-2 rounded-full flex items-center space-x-2.5 text-xs font-mono text-zinc-300 hover:text-white border border-white/10 hover:border-white/30 transition-all">
+            <div id="eqContainer" class="flex items-center space-x-0.5 paused">
+                <div class="eq-bar"></div>
+                <div class="eq-bar"></div>
+                <div class="eq-bar"></div>
+            </div>
+            <span id="audioStatus" class="font-bold tracking-wider uppercase text-[11px]">SOUND OFF</span>
+        </button>
     </div>
 
-    <!-- Título & Subtítulo -->
-    <h1 class="text-2xl font-bold tracking-wide drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]">Menu TL</h1>
-    <p class="text-xs text-slate-400 mt-1 mb-3">TL STUDIO • Soluções Web & Design</p>
+    <!-- Audio Element -->
+    <audio id="bgMusic" loop preload="none">
+        <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=synthwave-80s-110045.mp3" type="audio/mpeg">
+    </audio>
 
-    <!-- Badges / Tags -->
-    <div class="flex gap-2 mb-6">
-      <span class="px-3 py-1 text-[11px] font-semibold bg-blue-950/60 border border-blue-500/30 text-blue-300 rounded-full flex items-center gap-1.5 backdrop-blur-md">
-        <i class="fa-solid fa-code text-[10px]"></i> Developer
-      </span>
-      <span class="px-3 py-1 text-[11px] font-semibold bg-purple-950/60 border border-purple-500/30 text-purple-300 rounded-full flex items-center gap-1.5 backdrop-blur-md">
-        <i class="fa-solid fa-gamepad text-[10px]"></i> Gamer
-      </span>
-    </div>
+    <!-- MAIN CONTAINER -->
+    <main class="w-full max-w-sm mx-auto flex flex-col items-center">
 
-    <!-- Lista de Links -->
-    <div class="w-full space-y-3">
-      
-      <!-- Link 1 -->
-      <a href="#" target="_blank" class="w-full p-3.5 rounded-xl bg-slate-900/60 border border-slate-800/80 hover:border-blue-500/50 backdrop-blur-md flex items-center justify-between transition-all duration-300 hover:scale-[1.02] group neon-border">
-        <div class="flex items-center gap-3">
-          <div class="w-9 h-9 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400 group-hover:bg-blue-500 group-hover:text-white transition-all">
-            <i class="fa-brands fa-whatsapp text-lg"></i>
-          </div>
-          <span class="text-sm font-medium text-slate-200 group-hover:text-white">Fazer Orçamento (WhatsApp)</span>
+        <!-- HEADER SECTION: CROWN + AVATAR -->
+        <header class="flex flex-col items-center text-center w-full relative mb-4">
+            
+            <!-- Metallic Crown SVG Overlapping Avatar -->
+            <div class="z-20 -mb-7 crown-float">
+                <svg class="w-24 h-16 text-zinc-200" viewBox="0 0 120 70" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <!-- High detail silver crown path -->
+                    <path d="M15 58 L25 22 L48 44 L60 12 L72 44 L95 22 L105 58 Z" fill="url(#silverGrad)" stroke="#ffffff" stroke-width="2" stroke-linejoin="round"/>
+                    <circle cx="15" cy="18" r="4.5" fill="#ffffff"/>
+                    <circle cx="60" cy="8" r="5.5" fill="#ffffff"/>
+                    <circle cx="105" cy="18" r="4.5" fill="#ffffff"/>
+                    <circle cx="38" cy="50" r="3" fill="#000000"/>
+                    <circle cx="60" cy="50" r="3.5" fill="#000000"/>
+                    <circle cx="82" cy="50" r="3" fill="#000000"/>
+                    <defs>
+                        <linearGradient id="silverGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#ffffff"/>
+                            <stop offset="35%" stop-color="#a1a1aa"/>
+                            <stop offset="70%" stop-color="#f4f4f5"/>
+                            <stop offset="100%" stop-color="#52525b"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+
+            <!-- Glowing Circular Avatar -->
+            <div class="relative z-10 mb-3">
+                <div class="w-28 h-28 rounded-full p-[2px] bg-gradient-to-b from-white via-zinc-400 to-zinc-800 avatar-glow">
+                    <div class="w-full h-full bg-black rounded-full flex flex-col items-center justify-center border border-white/20 overflow-hidden">
+                        <!-- Custom Stylized Monogram Logo -->
+                        <span class="font-display font-black text-4xl tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white via-zinc-200 to-zinc-500">
+                            TL
+                        </span>
+                        <span class="text-[9px] font-bold tracking-widest text-zinc-400 uppercase -mt-1">STUDIO</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NAME & BADGE VERIFIED -->
+            <div class="flex items-center justify-center space-x-2 mb-1">
+                <h1 class="font-display font-bold text-2xl tracking-tight text-white drop-shadow-[0_0_12px_rgba(255,255,255,0.4)]">
+                    Menu TL
+                </h1>
+                <i class="fa-solid fa-circle-check text-white text-base" title="Verificado VIP"></i>
+            </div>
+
+            <!-- BIO / TAGLINE -->
+            <p class="text-xs font-medium text-zinc-400 max-w-xs mb-3.5 leading-relaxed">
+                TL STUDIO • Web Development & Design Agency
+            </p>
+
+            <!-- PILL BADGES -->
+            <div class="flex flex-wrap items-center justify-center gap-2 mb-5">
+                <span class="px-3 py-1 rounded-full text-[11px] font-semibold bg-zinc-900/90 text-zinc-300 border border-white/10 flex items-center gap-1.5 shadow-sm">
+                    <i class="fa-solid fa-gamepad text-zinc-400"></i> Gamer
+                </span>
+                <span class="px-3 py-1 rounded-full text-[11px] font-semibold bg-zinc-900/90 text-zinc-300 border border-white/10 flex items-center gap-1.5 shadow-sm">
+                    <i class="fa-solid fa-code text-zinc-400"></i> Developer
+                </span>
+                <span class="px-3 py-1 rounded-full text-[11px] font-semibold bg-zinc-900/90 text-zinc-300 border border-white/10 flex items-center gap-1.5 shadow-sm">
+                    <i class="fa-solid fa-crown text-amber-400"></i> CEO TL
+                </span>
+            </div>
+
+            <!-- QUICK COPY SOCIAL BAR (Guns.lol Style) -->
+            <div class="w-full oled-card p-2 rounded-2xl flex items-center justify-around border border-white/10 text-xs font-mono">
+                <!-- Social Tag 1 -->
+                <button onclick="copyToClipboard('TLStudio.official', 'Handle')" class="flex items-center space-x-1.5 px-2.5 py-1.5 rounded-xl hover:bg-white/10 text-zinc-300 hover:text-white transition-all group">
+                    <i class="fa-solid fa-bolt text-zinc-400 group-hover:text-white"></i>
+                    <span>TLStudio</span>
+                    <i class="fa-regular fa-copy text-[10px] text-zinc-500 group-hover:text-white"></i>
+                </button>
+
+                <div class="w-[1px] h-4 bg-white/10"></div>
+
+                <!-- Social Tag 2 -->
+                <button onclick="copyToClipboard('tl.discord.gg', 'Discord')" class="flex items-center space-x-1.5 px-2.5 py-1.5 rounded-xl hover:bg-white/10 text-zinc-300 hover:text-white transition-all group">
+                    <i class="fa-brands fa-discord text-indigo-400"></i>
+                    <span>tl.discord</span>
+                    <i class="fa-regular fa-copy text-[10px] text-zinc-500 group-hover:text-white"></i>
+                </button>
+
+                <div class="w-[1px] h-4 bg-white/10"></div>
+
+                <!-- Social Tag 3 -->
+                <button onclick="copyToClipboard('menutl_steam', 'Steam')" class="flex items-center space-x-1.5 px-2.5 py-1.5 rounded-xl hover:bg-white/10 text-zinc-300 hover:text-white transition-all group">
+                    <i class="fa-brands fa-steam text-sky-400"></i>
+                    <span>menutl</span>
+                    <i class="fa-regular fa-copy text-[10px] text-zinc-500 group-hover:text-white"></i>
+                </button>
+            </div>
+
+        </header>
+
+        <!-- PRIMARY ACTION LINKS -->
+        <section class="w-full space-y-3 mb-6">
+
+            <!-- Link 1: WhatsApp Direct -->
+            <a href="https://wa.me/5500000000000" target="_blank" class="bio-btn w-full p-3.5 rounded-2xl flex items-center justify-between group">
+                <div class="flex items-center space-x-3.5">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center group-hover:bg-emerald-500 group-hover:text-black transition-all">
+                        <i class="fa-brands fa-whatsapp text-xl"></i>
+                    </div>
+                    <div class="text-left">
+                        <div class="font-bold text-sm text-white group-hover:text-emerald-300 transition-colors">
+                            Orçamento WhatsApp
+                        </div>
+                        <div class="text-[11px] text-zinc-400">Atendimento rápido &amp; orçamentos</div>
+                    </div>
+                </div>
+                <i class="fa-solid fa-arrow-up-right-from-square text-xs text-zinc-500 group-hover:text-white transition-colors"></i>
+            </a>
+
+            <!-- Link 2: Discord Server -->
+            <a href="https://discord.gg" target="_blank" class="bio-btn w-full p-3.5 rounded-2xl flex items-center justify-between group">
+                <div class="flex items-center space-x-3.5">
+                    <div class="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center group-hover:bg-indigo-500 group-hover:text-white transition-all">
+                        <i class="fa-brands fa-discord text-xl"></i>
+                    </div>
+                    <div class="text-left">
+                        <div class="font-bold text-sm text-white group-hover:text-indigo-300 transition-colors">
+                            Comunidade Discord
+                        </div>
+                        <div class="text-[11px] text-zinc-400">Entre no nosso servidor VIP</div>
+                    </div>
+                </div>
+                <i class="fa-solid fa-arrow-up-right-from-square text-xs text-zinc-500 group-hover:text-white transition-colors"></i>
+            </a>
+
+            <!-- Link 3: Instagram -->
+            <a href="https://instagram.com" target="_blank" class="bio-btn w-full p-3.5 rounded-2xl flex items-center justify-between group">
+                <div class="flex items-center space-x-3.5">
+                    <div class="w-10 h-10 rounded-xl bg-pink-500/10 border border-pink-500/20 text-pink-400 flex items-center justify-center group-hover:bg-pink-500 group-hover:text-white transition-all">
+                        <i class="fa-brands fa-instagram text-xl"></i>
+                    </div>
+                    <div class="text-left">
+                        <div class="font-bold text-sm text-white group-hover:text-pink-300 transition-colors">
+                            Instagram Oficial
+                        </div>
+                        <div class="text-[11px] text-zinc-400">Acompanhe novidades &amp; stories</div>
+                    </div>
+                </div>
+                <i class="fa-solid fa-arrow-up-right-from-square text-xs text-zinc-500 group-hover:text-white transition-colors"></i>
+            </a>
+
+            <!-- Link 4: Chave Pix -->
+            <button onclick="copyToClipboard('contato@tlstudio.com', 'Chave PIX')" class="bio-btn w-full p-3.5 rounded-2xl flex items-center justify-between group text-left">
+                <div class="flex items-center space-x-3.5">
+                    <div class="w-10 h-10 rounded-xl bg-teal-500/10 border border-teal-500/20 text-teal-400 flex items-center justify-center group-hover:bg-teal-400 group-hover:text-black transition-all">
+                        <i class="fa-solid fa-pix text-xl"></i>
+                    </div>
+                    <div class="text-left">
+                        <div class="font-bold text-sm text-white group-hover:text-teal-300 transition-colors">
+                            Chave PIX Rápida
+                        </div>
+                        <div class="text-[11px] text-zinc-400">Clique para copiar a chave de pagamento</div>
+                    </div>
+                </div>
+                <span class="text-[10px] font-mono font-bold px-2.5 py-1 rounded-lg bg-zinc-800 text-zinc-300 border border-white/10 group-hover:border-white/30 group-hover:text-white transition-all">
+                    COPIAR
+                </span>
+            </button>
+
+        </section>
+
+        <!-- VIEW COUNTER (AT BOTTOM) -->
+        <div class="flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-zinc-950 border border-white/10 text-xs font-mono text-zinc-400">
+            <i class="fa-solid fa-eye text-zinc-200"></i>
+            <span id="visitCounter">1,490</span>
         </div>
-        <i class="fa-solid fa-chevron-right text-xs text-slate-500 group-hover:text-blue-400 transition-all"></i>
-      </a>
 
-      <!-- Link 2 -->
-      <a href="#" target="_blank" class="w-full p-3.5 rounded-xl bg-slate-900/60 border border-slate-800/80 hover:border-blue-500/50 backdrop-blur-md flex items-center justify-between transition-all duration-300 hover:scale-[1.02] group neon-border">
-        <div class="flex items-center gap-3">
-          <div class="w-9 h-9 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 group-hover:bg-indigo-500 group-hover:text-white transition-all">
-            <i class="fa-brands fa-discord text-lg"></i>
-          </div>
-          <span class="text-sm font-medium text-slate-200 group-hover:text-white">Comunidade Discord</span>
-        </div>
-        <i class="fa-solid fa-chevron-right text-xs text-slate-500 group-hover:text-indigo-400 transition-all"></i>
-      </a>
+    </main>
 
-      <!-- Link 3 -->
-      <a href="#" target="_blank" class="w-full p-3.5 rounded-xl bg-slate-900/60 border border-slate-800/80 hover:border-blue-500/50 backdrop-blur-md flex items-center justify-between transition-all duration-300 hover:scale-[1.02] group neon-border">
-        <div class="flex items-center gap-3">
-          <div class="w-9 h-9 rounded-lg bg-pink-500/10 border border-pink-500/20 flex items-center justify-center text-pink-400 group-hover:bg-pink-500 group-hover:text-white transition-all">
-            <i class="fa-brands fa-instagram text-lg"></i>
-          </div>
-          <span class="text-sm font-medium text-slate-200 group-hover:text-white">Instagram Oficial</span>
-        </div>
-        <i class="fa-solid fa-chevron-right text-xs text-slate-500 group-hover:text-pink-400 transition-all"></i>
-      </a>
-
-    </div>
-
-    <!-- Rodapé -->
-    <footer class="mt-8 text-center text-xs text-slate-600">
-      © TL STUDIO • Todos os direitos reservados
+    <!-- FOOTER -->
+    <footer class="mt-8 text-center text-[10px] font-mono text-zinc-600 uppercase tracking-widest">
+        &copy; Menu TL • TL STUDIO
     </footer>
 
-  </div>
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-zinc-900 border border-white/20 text-white text-xs px-4 py-2.5 rounded-xl shadow-2xl flex items-center space-x-2 z-50 opacity-0 pointer-events-none transition-all duration-300">
+        <i class="fa-solid fa-check text-emerald-400"></i>
+        <span id="toastMsg" class="font-medium">Copiado para a área de transferência!</span>
+    </div>
 
+    <script>
+        // Starfield Particles Animation
+        const canvas = document.getElementById('starfield');
+        const ctx = canvas.getContext('2d');
+        let stars = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initStars();
+        }
+
+        function initStars() {
+            stars = [];
+            const count = Math.floor(window.innerWidth / 12);
+            for (let i = 0; i < count; i++) {
+                stars.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    size: Math.random() * 1.2,
+                    alpha: Math.random(),
+                    speed: Math.random() * 0.01 + 0.005
+                });
+            }
+        }
+
+        function drawStars() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            stars.forEach(star => {
+                star.alpha += star.speed;
+                if (star.alpha > 1 || star.alpha < 0.2) star.speed = -star.speed;
+                
+                ctx.fillStyle = `rgba(255, 255, 255, ${Math.abs(star.alpha)})`;
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+                ctx.fill();
+            });
+            requestAnimationFrame(drawStars);
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+        drawStars();
+
+        // Audio Player Toggle
+        const audio = document.getElementById('bgMusic');
+        const eqContainer = document.getElementById('eqContainer');
+        const audioStatus = document.getElementById('audioStatus');
+        let playing = false;
+
+        function toggleAudio() {
+            if (!playing) {
+                audio.play().then(() => {
+                    playing = true;
+                    eqContainer.classList.remove('paused');
+                    audioStatus.textContent = "SOUND ON";
+                }).catch(() => {});
+            } else {
+                audio.pause();
+                playing = false;
+                eqContainer.classList.add('paused');
+                audioStatus.textContent = "SOUND OFF";
+            }
+        }
+
+        // Copy to Clipboard & Toast
+        function copyToClipboard(text, label) {
+            const temp = document.createElement('textarea');
+            temp.value = text;
+            document.body.appendChild(temp);
+            temp.select();
+            document.execCommand('copy');
+            document.body.removeChild(temp);
+
+            const toast = document.getElementById('toast');
+            document.getElementById('toastMsg').textContent = `${label} copiado!`;
+            toast.classList.remove('opacity-0', 'pointer-events-none');
+            
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'pointer-events-none');
+            }, 2200);
+        }
+
+        // View Counter Incrementor
+        let visits = 1490;
+        setInterval(() => {
+            if (Math.random() > 0.5) {
+                visits += 1;
+                document.getElementById('visitCounter').textContent = visits.toLocaleString('en-US');
+            }
+        }, 5000);
+    </script>
 </body>
 </html>
